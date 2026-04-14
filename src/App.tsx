@@ -17,7 +17,9 @@ import {
   ChevronRight,
   Clock,
   ShieldCheck,
-  BarChart3
+  BarChart3,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -26,7 +28,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 const NoiseOverlay = () => <div className="noise-overlay" />;
 
-const Navbar = () => {
+const ThemeToggle = ({ theme, toggleTheme }: { theme: string, toggleTheme: () => void }) => (
+  <button 
+    onClick={toggleTheme}
+    className="p-2 rounded-full border border-[var(--border-primary)] hover:bg-champagne/10 transition-colors"
+    aria-label="Toggle Theme"
+  >
+    {theme === 'dark' ? <Sun size={20} className="text-champagne" /> : <Moon size={20} className="text-obsidian" />}
+  </button>
+);
+
+const Navbar = ({ theme, toggleTheme }: { theme: string, toggleTheme: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -41,11 +53,11 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl transition-all duration-500 rounded-full px-6 py-3 flex items-center justify-between border ${
       isScrolled 
-        ? 'bg-obsidian/80 backdrop-blur-xl border-champagne/20 py-2' 
+        ? 'bg-[var(--bg-primary)]/80 backdrop-blur-xl border-[var(--border-primary)] py-2 shadow-lg' 
         : 'bg-transparent border-transparent'
     }`}>
       <div className="flex items-center gap-2">
-        <span className="font-sans font-extrabold text-xl tracking-tighter text-ivory">NEXFLOW</span>
+        <span className="font-sans font-extrabold text-xl tracking-tighter text-[var(--text-primary)]">OPELLIGENT</span>
       </div>
 
       <div className="hidden md:flex items-center gap-8">
@@ -53,7 +65,7 @@ const Navbar = () => {
           <a 
             key={item} 
             href={`#${item.toLowerCase()}`} 
-            className="text-sm font-medium text-ivory/70 hover:text-champagne transition-colors"
+            className="text-sm font-medium text-[var(--text-secondary)] hover:text-champagne transition-colors"
           >
             {item}
           </a>
@@ -61,11 +73,12 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center gap-4">
+        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
         <button className="hidden md:block bg-champagne text-obsidian px-5 py-2 rounded-full text-sm font-bold hover:scale-105 transition-transform active:scale-95">
           Get Started
         </button>
         <button 
-          className="md:hidden text-ivory"
+          className="md:hidden text-[var(--text-primary)]"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X /> : <Menu />}
@@ -74,12 +87,16 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 w-full mt-4 bg-obsidian border border-champagne/20 rounded-3xl p-6 flex flex-col gap-4 md:hidden animate-in fade-in slide-in-from-top-4">
+        <div className="absolute top-full left-0 w-full mt-4 bg-[var(--bg-primary)] border border-[var(--border-primary)] rounded-3xl p-6 flex flex-col gap-4 md:hidden animate-in fade-in slide-in-from-top-4 shadow-2xl">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-[var(--text-secondary)]">Theme</span>
+            <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+          </div>
           {['Features', 'Process', 'Pricing'].map((item) => (
             <a 
               key={item} 
               href={`#${item.toLowerCase()}`} 
-              className="text-lg font-medium text-ivory/70 hover:text-champagne"
+              className="text-lg font-medium text-[var(--text-secondary)] hover:text-champagne"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {item}
@@ -112,7 +129,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative h-screen w-full overflow-hidden flex items-end pb-24 px-6 md:px-12 lg:px-24">
+    <section ref={heroRef} className="relative h-[100dvh] w-full overflow-hidden flex items-end pb-24 px-6 md:px-12 lg:px-24">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -121,23 +138,23 @@ const Hero = () => {
           className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-[var(--bg-primary)]/60 to-transparent" />
       </div>
 
       <div ref={contentRef} className="relative z-10 max-w-4xl">
         <h1 className="flex flex-col gap-2">
-          <span className="hero-stagger text-ivory font-sans font-extrabold text-4xl md:text-6xl lg:text-7xl tracking-tighter uppercase">
+          <span className="hero-stagger text-[var(--text-primary)] font-sans font-extrabold text-4xl md:text-6xl lg:text-7xl tracking-tighter uppercase">
             Availability meets
           </span>
-          <span className="hero-stagger text-champagne font-serif italic text-6xl md:text-8xl lg:text-9xl leading-[0.85] -ml-1">
+          <span className="hero-stagger text-champagne font-serif italic text-5xl md:text-8xl lg:text-9xl leading-[0.85] -ml-1">
             Precision.
           </span>
         </h1>
-        <p className="hero-stagger mt-8 text-ivory/60 text-lg md:text-xl max-w-xl font-medium leading-relaxed">
-          Nexflow is the AI receptionist for elite home service businesses. We answer, qualify, and book your jobs 24/7 so you never miss a lead again.
+        <p className="hero-stagger mt-8 text-[var(--text-secondary)] text-base md:text-xl max-w-xl font-medium leading-relaxed">
+          Opelligent is the AI receptionist for elite home service businesses. We answer, qualify, and book your jobs 24/7 so you never miss a lead again.
         </p>
         <div className="hero-stagger mt-10">
-          <button className="group relative bg-champagne text-obsidian px-8 py-4 rounded-full font-bold text-lg overflow-hidden flex items-center gap-3 hover:scale-105 transition-transform active:scale-95">
+          <button className="group relative bg-champagne text-obsidian px-6 md:px-8 py-3 md:py-4 rounded-full font-bold text-base md:text-lg overflow-hidden flex items-center gap-3 hover:scale-105 transition-transform active:scale-95">
             <span className="relative z-10">See It Answer a Real Call</span>
             <ArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
             <div className="absolute inset-0 bg-ivory translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
@@ -216,7 +233,7 @@ const Features = () => {
     }, [index]);
 
     return (
-      <div className="bg-obsidian/50 p-4 rounded-xl border border-champagne/10 font-mono text-xs text-ivory/80 h-32 overflow-hidden">
+      <div className="bg-[var(--bg-primary)]/50 p-4 rounded-xl border border-[var(--border-primary)] font-mono text-xs text-[var(--text-primary)]/80 h-32 overflow-hidden">
         <div className="flex items-center gap-2 mb-2">
           <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
           <span className="text-[10px] uppercase tracking-tighter opacity-50">Live Feed</span>
@@ -252,12 +269,12 @@ const Features = () => {
     }, []);
 
     return (
-      <div ref={gridRef} className="relative p-4 bg-slate/10 rounded-2xl border border-champagne/5">
+      <div ref={gridRef} className="relative p-4 bg-slate/10 rounded-2xl border border-[var(--border-primary)]">
         <div className="grid grid-cols-7 gap-2 mb-4">
           {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => (
             <div 
               key={i} 
-              className={`aspect-square flex items-center justify-center text-[10px] border border-champagne/10 rounded-md ${i === 2 ? 'day-cell-active' : ''}`}
+              className={`aspect-square flex items-center justify-center text-[10px] border border-[var(--border-primary)] rounded-md ${i === 2 ? 'day-cell-active' : ''}`}
             >
               {day}
             </div>
@@ -268,7 +285,7 @@ const Features = () => {
         </div>
         <div ref={cursorRef} className="absolute top-0 left-0 pointer-events-none z-20">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 2L17 14L11 14L8 19L5 2Z" fill="white" stroke="black" strokeWidth="1"/>
+            <path d="M5 2L17 14L11 14L8 19L5 2Z" fill="currentColor" stroke="currentColor" strokeWidth="1" className="text-[var(--text-primary)]"/>
           </svg>
         </div>
       </div>
@@ -276,16 +293,16 @@ const Features = () => {
   };
 
   return (
-    <section id="features" ref={sectionRef} className="py-32 px-6 md:px-12 lg:px-24 bg-obsidian">
+    <section id="features" ref={sectionRef} className="py-32 px-6 md:px-12 lg:px-24 bg-[var(--bg-primary)]">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Card 1 */}
-        <div className="rounded-custom bg-slate/5 border border-champagne/10 p-10 flex flex-col gap-8 hover:border-champagne/30 transition-colors group">
+        <div className="rounded-custom bg-[var(--surface-primary)] border border-[var(--border-primary)] p-10 flex flex-col gap-8 hover:border-champagne/30 transition-colors group">
           <div className="flex flex-col gap-4">
             <div className="w-12 h-12 rounded-full bg-champagne/10 flex items-center justify-center text-champagne">
               <PhoneCall size={24} />
             </div>
             <h3 className="text-2xl font-bold font-sans">Never Miss a Lead</h3>
-            <p className="text-ivory/50 text-sm leading-relaxed">
+            <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
               Your AI receptionist picks up every call, even at 2am. No more voicemails, no more lost revenue.
             </p>
           </div>
@@ -293,13 +310,13 @@ const Features = () => {
         </div>
 
         {/* Card 2 */}
-        <div className="rounded-custom bg-slate/5 border border-champagne/10 p-10 flex flex-col gap-8 hover:border-champagne/30 transition-colors group">
+        <div className="rounded-custom bg-[var(--surface-primary)] border border-[var(--border-primary)] p-10 flex flex-col gap-8 hover:border-champagne/30 transition-colors group">
           <div className="flex flex-col gap-4">
             <div className="w-12 h-12 rounded-full bg-champagne/10 flex items-center justify-center text-champagne">
               <Zap size={24} />
             </div>
             <h3 className="text-2xl font-bold font-sans">Book on Autopilot</h3>
-            <p className="text-ivory/50 text-sm leading-relaxed">
+            <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
               Qualify callers and schedule appointments directly into your calendar without touching your phone.
             </p>
           </div>
@@ -307,13 +324,13 @@ const Features = () => {
         </div>
 
         {/* Card 3 */}
-        <div className="rounded-custom bg-slate/5 border border-champagne/10 p-10 flex flex-col gap-8 hover:border-champagne/30 transition-colors group">
+        <div className="rounded-custom bg-[var(--surface-primary)] border border-[var(--border-primary)] p-10 flex flex-col gap-8 hover:border-champagne/30 transition-colors group">
           <div className="flex flex-col gap-4">
             <div className="w-12 h-12 rounded-full bg-champagne/10 flex items-center justify-center text-champagne">
               <Calendar size={24} />
             </div>
             <h3 className="text-2xl font-bold font-sans">Outwork Competition</h3>
-            <p className="text-ivory/50 text-sm leading-relaxed">
+            <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
               While they're sending voicemail, you're already confirmed on the calendar. Speed to lead is everything.
             </p>
           </div>
@@ -345,7 +362,7 @@ const Philosophy = () => {
   }, []);
 
   return (
-    <section className="relative py-48 px-6 md:px-12 lg:px-24 bg-obsidian overflow-hidden" ref={sectionRef}>
+    <section className="relative py-48 px-6 md:px-12 lg:px-24 bg-[var(--bg-primary)] overflow-hidden" ref={sectionRef}>
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <img 
           src="https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?auto=format&fit=crop&q=80&w=2072" 
@@ -357,8 +374,8 @@ const Philosophy = () => {
       
       <div className="relative z-10 max-w-5xl mx-auto flex flex-col gap-12">
         <div className="phi-text">
-          <p className="text-ivory/40 text-lg md:text-xl font-medium max-w-2xl">
-            Most home service software focuses on: <span className="text-ivory/60">managing the jobs you already have.</span>
+          <p className="text-[var(--text-secondary)] text-lg md:text-xl font-medium max-w-2xl">
+            Most home service software focuses on: <span className="text-[var(--text-primary)]/60">managing the jobs you already have.</span>
           </p>
         </div>
         <div className="phi-text">
@@ -377,7 +394,7 @@ const Protocol = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray('.protocol-card');
+      const cards = gsap.utils.toArray<HTMLElement>('.protocol-card');
       cards.forEach((card, i) => {
         if (i === cards.length - 1) return;
         
@@ -424,16 +441,16 @@ const Protocol = () => {
   ];
 
   return (
-    <section id="process" ref={containerRef} className="bg-obsidian">
+    <section id="process" ref={containerRef} className="bg-[var(--bg-primary)]">
       {steps.map((step, i) => (
-        <div key={i} className="protocol-card h-screen w-full flex items-center justify-center px-6 sticky top-0 bg-obsidian border-t border-champagne/5">
-          <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="flex flex-col gap-6">
-              <span className="font-mono text-champagne text-xl tracking-widest">{step.num}</span>
-              <h2 className="text-5xl md:text-7xl font-sans font-extrabold tracking-tighter text-ivory">{step.title}</h2>
-              <p className="text-ivory/60 text-xl leading-relaxed max-w-md">{step.desc}</p>
+        <div key={i} className="protocol-card h-[100dvh] w-full flex items-center justify-center px-6 sticky top-0 bg-[var(--bg-primary)] border-t border-[var(--border-primary)]">
+          <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="flex flex-col gap-4 md:gap-6">
+              <span className="font-mono text-champagne text-base md:text-xl tracking-widest">{step.num}</span>
+              <h2 className="text-3xl md:text-7xl font-sans font-extrabold tracking-tighter text-[var(--text-primary)]">{step.title}</h2>
+              <p className="text-[var(--text-secondary)] text-base md:text-xl leading-relaxed max-w-md">{step.desc}</p>
             </div>
-            <div className="relative aspect-square rounded-custom bg-slate/5 border border-champagne/10 flex items-center justify-center overflow-hidden">
+            <div className="relative aspect-square rounded-custom bg-[var(--surface-primary)] border border-[var(--border-primary)] flex items-center justify-center overflow-hidden max-h-[300px] md:max-h-none">
               {/* Unique Animation for each card */}
               {i === 0 && (
                 <div className="relative w-64 h-64 border-2 border-dashed border-champagne/20 rounded-full flex items-center justify-center animate-[spin_20s_linear_infinite]">
@@ -481,10 +498,10 @@ const Protocol = () => {
 
 const Pricing = () => {
   return (
-    <section id="pricing" className="py-32 px-6 md:px-12 lg:px-24 bg-obsidian">
+    <section id="pricing" className="py-32 px-6 md:px-12 lg:px-24 bg-[var(--bg-primary)]">
       <div className="text-center mb-20">
-        <h2 className="text-4xl md:text-6xl font-sans font-extrabold tracking-tighter text-ivory mb-4">The Investment</h2>
-        <p className="text-ivory/50 max-w-xl mx-auto">Choose the tier that matches your growth trajectory. All plans include Maya, our core AI engine.</p>
+        <h2 className="text-4xl md:text-6xl font-sans font-extrabold tracking-tighter text-[var(--text-primary)] mb-4">The Investment</h2>
+        <p className="text-[var(--text-secondary)] max-w-xl mx-auto">Choose the tier that matches your growth trajectory. All plans include Maya, our core AI engine.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
@@ -498,7 +515,7 @@ const Pricing = () => {
             className={`rounded-custom p-10 flex flex-col gap-8 border transition-all duration-500 ${
               plan.active 
                 ? 'bg-champagne text-obsidian border-champagne scale-105 z-10 shadow-2xl shadow-champagne/20' 
-                : 'bg-slate/5 text-ivory border-champagne/10 hover:border-champagne/30'
+                : 'bg-[var(--surface-primary)] text-[var(--text-primary)] border-[var(--border-primary)] hover:border-champagne/30'
             }`}
           >
             <div className="flex flex-col gap-2">
@@ -530,11 +547,11 @@ const Pricing = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-slate/10 pt-32 pb-12 px-6 md:px-12 lg:px-24 rounded-t-[4rem] border-t border-champagne/10">
+    <footer className="bg-[var(--surface-primary)] pt-32 pb-12 px-6 md:px-12 lg:px-24 rounded-t-[4rem] border-t border-[var(--border-primary)]">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-24">
         <div className="col-span-1 md:col-span-2 flex flex-col gap-6">
-          <span className="font-sans font-extrabold text-3xl tracking-tighter text-ivory">NEXFLOW</span>
-          <p className="text-ivory/50 max-w-sm leading-relaxed">
+          <span className="font-sans font-extrabold text-3xl tracking-tighter text-[var(--text-primary)]">OPELLIGENT</span>
+          <p className="text-[var(--text-secondary)] max-w-sm leading-relaxed">
             Revolutionizing home service growth through autonomous AI agents. We don't just answer calls; we build businesses.
           </p>
           <div className="flex items-center gap-2 text-green-500 font-mono text-[10px] uppercase tracking-widest">
@@ -544,8 +561,8 @@ const Footer = () => {
         </div>
         
         <div className="flex flex-col gap-6">
-          <h4 className="text-ivory font-bold uppercase text-xs tracking-widest">Navigation</h4>
-          <ul className="flex flex-col gap-3 text-sm text-ivory/50">
+          <h4 className="text-[var(--text-primary)] font-bold uppercase text-xs tracking-widest">Navigation</h4>
+          <ul className="flex flex-col gap-3 text-sm text-[var(--text-secondary)]">
             <li><a href="#features" className="hover:text-champagne transition-colors">Features</a></li>
             <li><a href="#process" className="hover:text-champagne transition-colors">Process</a></li>
             <li><a href="#pricing" className="hover:text-champagne transition-colors">Pricing</a></li>
@@ -553,8 +570,8 @@ const Footer = () => {
         </div>
 
         <div className="flex flex-col gap-6">
-          <h4 className="text-ivory font-bold uppercase text-xs tracking-widest">Legal</h4>
-          <ul className="flex flex-col gap-3 text-sm text-ivory/50">
+          <h4 className="text-[var(--text-primary)] font-bold uppercase text-xs tracking-widest">Legal</h4>
+          <ul className="flex flex-col gap-3 text-sm text-[var(--text-secondary)]">
             <li><a href="#" className="hover:text-champagne transition-colors">Privacy Policy</a></li>
             <li><a href="#" className="hover:text-champagne transition-colors">Terms of Service</a></li>
             <li><a href="#" className="hover:text-champagne transition-colors">Cookie Policy</a></li>
@@ -562,8 +579,8 @@ const Footer = () => {
         </div>
       </div>
       
-      <div className="max-w-7xl mx-auto pt-12 border-t border-champagne/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] uppercase tracking-widest text-ivory/30">
-        <span>© 2026 Nexflow Technologies Inc.</span>
+      <div className="max-w-7xl mx-auto pt-12 border-t border-[var(--border-primary)] flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] uppercase tracking-widest text-[var(--text-primary)]/30">
+        <span>© 2026 Opelligent Technologies Inc.</span>
         <div className="flex gap-8">
           <span>Designed in London</span>
           <span>Built for Scale</span>
@@ -576,10 +593,25 @@ const Footer = () => {
 // --- Main App ---
 
 export default function App() {
+  const [theme, setTheme] = useState('dark');
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
+    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+  };
+
   return (
-    <main className="relative bg-obsidian min-h-screen selection:bg-champagne selection:text-obsidian">
+    <main className="relative bg-[var(--bg-primary)] min-h-screen selection:bg-champagne selection:text-obsidian">
       <NoiseOverlay />
-      <Navbar />
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
       <Hero />
       <Features />
       <Philosophy />

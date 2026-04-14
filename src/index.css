@@ -12,8 +12,24 @@
 }
 
 @layer base {
+  :root {
+    --bg-primary: #FAF8F5;
+    --text-primary: #0D0D12;
+    --text-secondary: rgba(13, 13, 18, 0.6);
+    --border-primary: rgba(13, 13, 18, 0.1);
+    --surface-primary: rgba(42, 42, 53, 0.05);
+  }
+
+  .dark {
+    --bg-primary: #0D0D12;
+    --text-primary: #FAF8F5;
+    --text-secondary: rgba(250, 248, 245, 0.6);
+    --border-primary: rgba(201, 168, 76, 0.1);
+    --surface-primary: rgba(42, 42, 53, 0.2);
+  }
+
   body {
-    @apply bg-obsidian text-ivory antialiased selection:bg-champagne selection:text-obsidian;
+    @apply bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-500 antialiased selection:bg-champagne selection:text-obsidian;
   }
 }
 
