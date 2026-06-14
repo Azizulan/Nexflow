@@ -38,25 +38,25 @@ const BUSINESS = {
   email: 'anud2anupama@gmail.com',
   phone: '+880 1625479427',
   address: '85/1-A, Road 10, Kadamtola, Rajarbag Basaboo, Dhaka-1214, Bangladesh',
-  photoUrl: '/mufty.jpg',              // place photo at Nexflow/public/mufty.jpg
+  photoUrl: '/anupama.jpg',
 };
 
 // Founder — featured above the team grid.
 const FOUNDER = {
   name: 'Azizul Hakim Zen',
   role: 'Founder & Managing Director',
-  photoUrl: '/founder.jpg',   // place photo at Nexflow/public/founder.jpg
+  photoUrl: '/azizul.jpg',
   bio: 'Azizul founded OPELLIGENT to help businesses grow through expertly managed digital advertising. He leads overall strategy and operations, overseeing every client account the agency takes on.',
 };
 
 // Team shown in the "Team" section. Adjust roles as you like.
 const TEAM = [
-  { name: 'Mufty Anupama Parvin', role: 'Digital Marketing Specialist',       photoUrl: '/mufty.jpg',  email: 'anud2anupama@gmail.com',    phone: '+880 1625479427' }, // Nexflow/public/mufty.jpg
-  { name: 'MD Abul Kashem',       role: 'Digital Marketing (Meta Platforms)', photoUrl: '/kashem.jpg', email: 'xnotredamian.bd@gmail.com', phone: '+880 1521576357' }, // Nexflow/public/kashem.jpg
-  { name: 'Shafi Hasan',          role: 'Web Designer',                       photoUrl: '/shafi.jpg',  email: 'shafi1zixfo@gmail.com',     phone: '+880 1914-578117' }, // Nexflow/public/shafi.jpg
-  { name: 'Md Musa',              role: 'Account Manager',                    photoUrl: '/musa.jpg',   email: 'musa12rm@gmail.com',        phone: '+880 1975-024330' }, // Nexflow/public/musa.jpg
-  { name: 'Rezaul Rohan',         role: 'Graphic Designer',                   photoUrl: '/rezaul.jpg', email: 'rezaul1090@gmail.com',      phone: '+880 1645-208168' }, // Nexflow/public/rezaul.jpg
-  { name: 'Rajib Hasan',          role: 'Media Buyer',                        photoUrl: '/rajib.jpg',  email: 'rajibhasan42@gmail.com',    phone: '+880 1881-827344' }, // Nexflow/public/rajib.jpg
+  { name: 'Mufty Anupama Parvin', role: 'Digital Marketing Specialist',       photoUrl: '/anupama.jpg', email: 'anud2anupama@gmail.com',    phone: '+880 1625479427' },
+  { name: 'MD Abul Kashem',       role: 'Digital Marketing (Meta Platforms)', photoUrl: '/kashem.jpg',  email: 'xnotredamian.bd@gmail.com', phone: '+880 1521576357' },
+  { name: 'Shafi Hasan',          role: 'Web Designer',                       photoUrl: '/shafi.png',   email: 'shafi1zixfo@gmail.com',     phone: '+880 1914-578117' },
+  { name: 'Md Musa',              role: 'Account Manager',                    photoUrl: '/musa.png',    email: 'musa12rm@gmail.com',        phone: '+880 1975-024330' },
+  { name: 'Rezaul Rohan',         role: 'Graphic Designer',                   photoUrl: '/rezaul.webp', email: 'rezaul1090@gmail.com',      phone: '+880 1645-208168' },
+  { name: 'Rajib Hasan',          role: 'Media Buyer',                        photoUrl: '/razib.webp',  email: 'rajibhasan42@gmail.com',    phone: '+880 1881-827344' },
 ];
 
 // --- Components ---
