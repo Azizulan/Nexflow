@@ -21,7 +21,8 @@ import {
   Mail,
   Phone,
   MapPin,
-  User
+  User,
+  Facebook
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -39,6 +40,7 @@ const BUSINESS = {
   phone: '+880 1625479427',
   address: '85/1-A, Road 10, Kadamtola, Rajarbag Basaboo, Dhaka-1214, Bangladesh',
   photoUrl: '/anupama.jpg',
+  facebook: 'https://facebook.com/opelligent',
 };
 
 // Founder — featured above the team grid.
@@ -94,7 +96,9 @@ const Navbar = ({ theme, toggleTheme }: { theme: string, toggleTheme: () => void
         : 'bg-transparent border-transparent'
     }`}>
       <div className="flex items-center gap-2">
-        <span className="font-sans font-extrabold text-xl tracking-tighter text-[var(--text-primary)]">{BUSINESS.brand}</span>
+        <a href="#" aria-label={BUSINESS.brand}>
+          <img src="/logo.png" alt={BUSINESS.brand} className="h-7 md:h-8 w-auto" />
+        </a>
       </div>
 
       <div className="hidden md:flex items-center gap-8">
@@ -728,6 +732,7 @@ const Contact = () => {
     { icon: <Mail size={20} />, label: 'Email', value: BUSINESS.email, href: `mailto:${BUSINESS.email}` },
     { icon: <Phone size={20} />, label: 'Phone', value: BUSINESS.phone, href: `tel:${BUSINESS.phone.replace(/\s/g, '')}` },
     { icon: <MapPin size={20} />, label: 'Address', value: BUSINESS.address },
+    { icon: <Facebook size={20} />, label: 'Facebook', value: 'facebook.com/opelligent', href: BUSINESS.facebook },
   ];
 
   return (
@@ -783,7 +788,7 @@ const Footer = () => {
     <footer className="bg-[var(--surface-primary)] pt-32 pb-12 px-6 md:px-12 lg:px-24 rounded-t-[4rem] border-t border-[var(--border-primary)]">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-24">
         <div className="col-span-1 md:col-span-2 flex flex-col gap-6">
-          <span className="font-sans font-extrabold text-3xl tracking-tighter text-[var(--text-primary)]">{BUSINESS.brand}</span>
+          <img src="/logo.png" alt={BUSINESS.brand} className="h-10 w-auto self-start" />
           <p className="text-[var(--text-secondary)] max-w-sm leading-relaxed">
             A digital marketing agency helping brands grow through expertly managed Meta and Google advertising campaigns.
           </p>
@@ -791,6 +796,7 @@ const Footer = () => {
             <a href={`mailto:${BUSINESS.email}`} className="flex items-center gap-2 hover:text-champagne transition-colors"><Mail size={14} /> {BUSINESS.email}</a>
             <a href={`tel:${BUSINESS.phone.replace(/\s/g, '')}`} className="flex items-center gap-2 hover:text-champagne transition-colors"><Phone size={14} /> {BUSINESS.phone}</a>
             <span className="flex items-center gap-2"><MapPin size={14} /> {BUSINESS.address}</span>
+            <a href={BUSINESS.facebook} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-champagne transition-colors"><Facebook size={14} /> facebook.com/opelligent</a>
           </div>
         </div>
 
