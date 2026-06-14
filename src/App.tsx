@@ -34,7 +34,7 @@ gsap.registerPlugin(ScrollTrigger);
 const BUSINESS = {
   brand: 'OPELLIGENT',
   founder: 'Mufty Anupama Parvin',     // primary contact — MUST match Payoneer registration
-  role: 'Digital Marketing Specialist',
+  role: 'Co-Founder & Head of Operations',
   email: 'anud2anupama@gmail.com',
   phone: '+880 1625479427',
   address: '85/1-A, Road 10, Kadamtola, Rajarbag Basaboo, Dhaka-1214, Bangladesh',
@@ -51,8 +51,8 @@ const FOUNDER = {
 
 // Team shown in the "Team" section. Adjust roles as you like.
 const TEAM = [
-  { name: 'Mufty Anupama Parvin', role: 'Digital Marketing Specialist',       photoUrl: '/anupama.jpg', email: 'anud2anupama@gmail.com',    phone: '+880 1625479427' },
-  { name: 'MD Abul Kashem',       role: 'Digital Marketing (Meta Platforms)', photoUrl: '/kashem.jpg',  email: 'xnotredamian.bd@gmail.com', phone: '+880 1521576357' },
+  { name: 'Mufty Anupama Parvin', role: 'Co-Founder & Head of Operations',    photoUrl: '/anupama.jpg', email: 'anud2anupama@gmail.com',    phone: '+880 1625479427' },
+  { name: 'MD Abul Kashem',       role: 'Meta Ads Specialist',                photoUrl: '/kashem.jpg',  email: 'xnotredamian.bd@gmail.com', phone: '+880 1521576357' },
   { name: 'Shafi Hasan',          role: 'Web Designer',                       photoUrl: '/shafi.png',   email: 'shafi1zixfo@gmail.com',     phone: '+880 1914-578117' },
   { name: 'Md Musa',              role: 'Account Manager',                    photoUrl: '/musa.png',    email: 'musa12rm@gmail.com',        phone: '+880 1975-024330' },
   { name: 'Rezaul Rohan',         role: 'Graphic Designer',                   photoUrl: '/rezaul.webp', email: 'rezaul1090@gmail.com',      phone: '+880 1645-208168' },
