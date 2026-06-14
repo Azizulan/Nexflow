@@ -97,7 +97,7 @@ const Navbar = ({ theme, toggleTheme }: { theme: string, toggleTheme: () => void
     }`}>
       <div className="flex items-center gap-2">
         <a href="#" aria-label={BUSINESS.brand}>
-          <img src="/logo.png" alt={BUSINESS.brand} className="h-7 md:h-8 w-auto" />
+          <img src="/logo.png" alt={BUSINESS.brand} className="h-8 md:h-10 w-auto" />
         </a>
       </div>
 
@@ -788,7 +788,7 @@ const Footer = () => {
     <footer className="bg-[var(--surface-primary)] pt-32 pb-12 px-6 md:px-12 lg:px-24 rounded-t-[4rem] border-t border-[var(--border-primary)]">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-24">
         <div className="col-span-1 md:col-span-2 flex flex-col gap-6">
-          <img src="/logo.png" alt={BUSINESS.brand} className="h-10 w-auto self-start" />
+          <img src="/logo.png" alt={BUSINESS.brand} className="h-12 md:h-14 w-auto self-start" />
           <p className="text-[var(--text-secondary)] max-w-sm leading-relaxed">
             A digital marketing agency helping brands grow through expertly managed Meta and Google advertising campaigns.
           </p>
