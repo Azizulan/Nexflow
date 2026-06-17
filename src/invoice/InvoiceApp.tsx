@@ -7,20 +7,19 @@ import { Plus, Trash2, Download, RotateCcw, RefreshCw } from 'lucide-react';
 const BUSINESS = {
   brand: 'OPELLIGENT',
   addressLines: ['85/1-A, Road 10, Kadamtola, Rajarbag Basaboo', 'Dhaka-1214, Bangladesh'],
-  email: 'anud2anupama@gmail.com',
-  phone: '+880 1625479427',
+  contactEmail: 'hello@opelligent.com',
   logo: '/logo-invoice.png',
 };
 
 // Employees who can issue invoices (used for the "Prepared by" selector).
 const EMPLOYEES = [
-  { name: 'Azizul Hakim Zen', role: 'Founder & Managing Director' },
-  { name: 'Mufty Anupama Parvin', role: 'Co-Founder & Head of Operations' },
-  { name: 'MD Abul Kashem', role: 'Meta Ads Specialist' },
-  { name: 'Md Musa', role: 'Account Manager' },
-  { name: 'Rezaul Rohan', role: 'Graphic Designer' },
-  { name: 'Shafi Hasan', role: 'Web Designer' },
-  { name: 'Rajib Hasan', role: 'Media Buyer' },
+  { name: 'Azizul Hakim Zen', role: 'Founder & Managing Director', email: '', phone: '' },
+  { name: 'Mufty Anupama Parvin', role: 'Co-Founder & Head of Operations', email: 'anud2anupama@gmail.com', phone: '+880 1625479427' },
+  { name: 'MD Abul Kashem', role: 'Meta Ads Specialist', email: 'xnotredamian.bd@gmail.com', phone: '+880 1521576357' },
+  { name: 'Md Musa', role: 'Account Manager', email: 'musa12rm@gmail.com', phone: '+880 1975-024330' },
+  { name: 'Rezaul Rohan', role: 'Graphic Designer', email: 'rezaul1090@gmail.com', phone: '+880 1645-208168' },
+  { name: 'Shafi Hasan', role: 'Web Designer', email: 'shafi1zixfo@gmail.com', phone: '+880 1914-578117' },
+  { name: 'Rajib Hasan', role: 'Media Buyer', email: 'rajibhasan42@gmail.com', phone: '+880 1881-827344' },
 ];
 
 const CURRENCIES: Record<string, string> = {
@@ -227,8 +226,11 @@ export default function InvoiceApp() {
                   <div className="inv-name">{employee.name}</div>
                   <div className="inv-role">{employee.role}</div>
                   <div className="inv-contact">
+                    {(employee.email || employee.phone) && (
+                      <>{[employee.email, employee.phone].filter(Boolean).join('  |  ')}<br /></>
+                    )}
                     {BUSINESS.addressLines.map((l, i) => <React.Fragment key={i}>{l}<br /></React.Fragment>)}
-                    {BUSINESS.email}&nbsp;|&nbsp;{BUSINESS.phone}
+                    {BUSINESS.contactEmail}
                   </div>
                 </div>
                 <div className="inv-title">
